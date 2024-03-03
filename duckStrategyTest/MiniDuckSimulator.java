@@ -29,5 +29,9 @@ public class MiniDuckSimulator{
         rubber.swim();
 
         rubber.performFly();
+
+        DuckCall duckcall = new DuckCall();
+        duckcall.display();
+        duckcall.performQuack();
     }
 }
