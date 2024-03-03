@@ -4,9 +4,11 @@ public class GooseAdapter implements Quackable{
 
     public GooseAdapter(Goose goose){
         this.goose=goose;
+        observable = new Observable(this);
     }
     public void quack(){
         goose.honk();
+        notifyObservers();
     }
 
 
@@ -16,4 +18,9 @@ public class GooseAdapter implements Quackable{
     public void notifyObservers(){
         observable.notifyObservers();
     }
+
+    public String toString(){
+        return "Goose pretending to be a Duck";
+    }
+
 }

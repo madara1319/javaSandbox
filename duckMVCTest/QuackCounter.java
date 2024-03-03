@@ -3,6 +3,7 @@ public class QuackCounter implements Quackable{
 
     Observable observable;
     static int numberOfQuacks;
+
     public QuackCounter(Quackable duck)
     {
         this.duck=duck;
@@ -17,9 +18,9 @@ public class QuackCounter implements Quackable{
 
 
     public void registerObserver(Observer observer){
-        observable.registerObserver(observer);
+        duck.registerObserver(observer);
     }
     public void notifyObservers(){
-        observable.notifyObservers();
+        duck.notifyObservers();
     }
 }
