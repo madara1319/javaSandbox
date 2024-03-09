@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 public class PancakeHouseMenu{
     List<MenuItem> menuItems;
 
@@ -17,11 +21,16 @@ public class PancakeHouseMenu{
                 3.59);
     }
     public void addItem(String name, String description, boolean vegetarian, double price){
-        menuItem.add(menuItem);
+        MenuItem menuItem = new MenuItem(name,description,vegetarian,price);
+        menuItems.add(menuItem);
     }
-    public ArrayList<MenuItem> getMenuItems(){
-        return menuItems;
+
+    public Iterator createIterator(){
+        return new PancakeHouseIterator(menuItems);
     }
+  //  public ArrayList<MenuItem> getMenuItems(){
+  //      return menuItems;
+  //  }
 
     //other menu methods here
 }
