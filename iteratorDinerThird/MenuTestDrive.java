@@ -11,6 +11,6 @@ public class MenuTestDrive{
         Waitress waitress = new Waitress(menus);
 
         waitress.printMenu();
-        System.out.println("\n\n\n\nTest");
+        System.out.println("\n\n\n\n\n\n\nTest");
     }
 }
