@@ -1,4 +1,8 @@
-import java.util.ArrayList;
+import java.util.*;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.*;
+import javax.sound.sampled.Line;
 public class BeatModel implements BeatModelInterface, Runnable{
     //these hold two kinds of observers
     List<BeatObserver> beatObservers = new ArrayList<BeatObserver>();
@@ -18,7 +22,8 @@ public class BeatModel implements BeatModelInterface, Runnable{
             clip.open(AudioSystem.getAudioInputStream(resource));
         }
         catch(Exception ex){
-            /*...*/
+            System.out.println("Error: Cant load clip");
+            System.out.println(ex);
         }
     }
 
@@ -59,7 +64,45 @@ public class BeatModel implements BeatModelInterface, Runnable{
     public int getBPM(){
         return bpm;
     }
+    
+    public void registerObserver(BeatObserver o){
+        beatObservers.add(o);
+    }
+    public void notifyBPMObservers(){
+        for (int i = 0; i< beatObservers.size(); i++){
+            BeatObserver observer = (BeatObserver)beatObservers.get(i);
+            observer.updateBeat();
+        }
+        
+    }
+    public void registerObserver(BPMObserver o){
+        bpmObservers.add(o);
+    }
+    public void notifyBPMObservers(){
+        for (int i = 0; i <   bpmObservers.size(); i++){
+            BPMObserver observer = (BPMObserver)bpmObservers.get(i);
+            observer.updateBPM();
+        }
+    }
 
-    //code to register and notify obserevrs
-    //audio code to handle beat 
+    public void removeObserver(BeatObserver o){
+        int i = beatObservers.indexOf(o);
+        if(i>=0){
+            beatObservers.remove(i);
+        }
+    }
+    public void removeObserver(BPMObserver o){
+        int i = bpmObservers.indexOf(o);
+        if(i>=0){
+            bpmObservers.remove(i);
+        }
+    }
+    public void playBeat(){
+        clip.setFramePosition(0);
+        clip.start();
+    }
+    public void stopBeat(){
+        clip.setFramePosition(0);
+        clip.stop();
+    }
 }
