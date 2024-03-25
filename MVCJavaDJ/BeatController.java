@@ -17,6 +17,12 @@ public class BeatController implements ControllerInterface{
         view.disableStartMenuItem();
         view.enableStopMenuItem();
     }
+
+    public void stop(){
+        model.off();
+        view.disableStopMenuItem();
+        view.enableStartMenuItem();
+    }
     public void increaseBPM(){
         int bpm = model.getBPM();
         model.setBPM(bpm + 1);

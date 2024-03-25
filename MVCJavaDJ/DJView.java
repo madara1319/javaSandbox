@@ -12,8 +12,8 @@ public class DJView implements ActionListener, BeatObserver, BPMObserver{
     JButton decreaseBPMButton;
     JMenuBar menuBar;
     JMenu menu;
-    JMenu startMenuItem;
-    JMenu stopMenuItem;
+    JMenuItem startMenuItem;
+    JMenuItem stopMenuItem;
     JFrame viewFrame;
     JFrame controlFrame;
     JPanel viewPanel;
@@ -33,7 +33,7 @@ public class DJView implements ActionListener, BeatObserver, BPMObserver{
         viewFrame = new JFrame("View");
         viewFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         viewFrame.setSize(new Dimension(100,80));
-        bpmOutputLabel = new JLabel("offline",SwingContestants.CENTER);
+        bpmOutputLabel = new JLabel("offline",SwingConstants.CENTER);
         beatBar = new BeatBar();
         beatBar.setValue(0);
         JPanel bpmPanel = new JPanel(new GridLayout(2,1));
@@ -67,11 +67,21 @@ public class DJView implements ActionListener, BeatObserver, BPMObserver{
 
         menuBar = new JMenuBar();
         menu = new JMenu("DJ Control");
+
+        stopMenuItem = new JMenuItem("Stop");
+        menu.add(stopMenuItem);
+
+        stopMenuItem.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                controller.stop();
+            }
+        });
+
         startMenuItem = new JMenuItem("Start");
         menu.add(startMenuItem);
         startMenuItem.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event){
-                controller.stop();
+                controller.start();
             }
         });
         
@@ -86,7 +96,7 @@ public class DJView implements ActionListener, BeatObserver, BPMObserver{
         menuBar.add(menu);
         controlFrame.setJMenuBar(menuBar);
         bpmTextField = new JTextField(2);
-        bpmLabel = new JLabel("Enter BPM: ", SwingContestants.RIGHT);
+        bpmLabel = new JLabel("Enter BPM: ", SwingConstants.RIGHT);
         setBPMButton = new JButton("Set");
         //continue
 
@@ -116,4 +126,5 @@ public class DJView implements ActionListener, BeatObserver, BPMObserver{
             controller.decreaseBPM();
         }
     }
+
 }
